@@ -1,0 +1,16 @@
+git rash本地提交代码主要命令
+
+cd /D   //进入指定盘
+
+git clone (创建的github的库的网址)    //将github的库创建到本地
+
+git add （文件名.格式名）  //提交
+
+git commit -m "*"          //给上传的文件的做备注，方便查找记忆
+
+git push origin master     //登陆
+
+
+
+
+
