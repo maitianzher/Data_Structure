@@ -1,0 +1,134 @@
+MYSQL
+
+mysql语句规范
+1关键字与函数名称全部大写
+2数据库名称、表名称、字段名称全部小写
+3sql语句结尾必须以分好结尾
+
+创建数据库
+create ｛database | SCHAME｝ db_name;
+
+删除数据库
+drop database da_name;
+
+数据类型  整形，浮点型，时间类型，字符型
+CHAR（M）   0<=
+
+创建数据表
+CREATE TABLE [IF NOT EXISTS] table＿name(column_name data_type......)
+
+插入记录
+INSERT [INTO] tbl_name[(column_name,...)] VALUES(val,...)
+
+-----------------------------------------------------------------------------------------
+
+AUTO_INCREMENT
+自动编号，必须和主键组合使用；默认起始值为1，每次增加1；
+
+外键约束
+保持数据一致性，完整性，实现一对一或一对多关系
+
+外键约束的要求
+1父表和子表必须实用相同的存储引擎，而且禁止实用临时表
+2数据表的存储引擎只能为InnoDB
+3外键列和参照列必须具有相似的数据类型。其中数字的长度或是否有符号位必须相同，而字符的长度则可以不同
+4外键列和参照列必须创建索引。如果外键列不存在索引的话，mysql将自动创建索引。
+
+--------------------------------------------------------------------------------------------------------------
+修改数据表
+1添加数据表
+（1）添加一列（也可以添加多列）
+ALTER TABLE table＿name ADD [COLUNMN] column_name column_definition [FIRST | AFTER column_name];
+
+2删除列
+ALTER TABLE table＿name DROP [COLUNMN] column_name
+
+3添加主键约束
+ALTER TABLE table＿name ADD [CONSTAINT][symbol]] PRIMARY KEUY [index_type] (index column_name,...);
+
+4添加唯一约束
+ALTER TABLE table＿name ADD CONSTAINT][symbol]] UNIQUE [index_type] (index column_name,...);
+
+5添加外键约束
+ALTER TABLE table＿name ADD FOREIGN KEY [index_name]  (index_column＿ｎａｍｅ，．．．）ＲＥＦＥＲＥＮＣＥＳ＿ＤＥＦＩＮＩＴＩＯＮ
+
+６添加默认删除约束
+ALTER TABLE table＿name ALTER [COLUNMN] col_name {SET DEFAULT literal |DROP DEFAULT}
+
+7删除主键约束
+ＡＬＴＥＲ　ＴＡＢＬＥ　ｔｂｌ＿ｎａｍｅ　ＤＲＯＰ　ＰＲＩＭＡＲＹ　ＫＥＹ；
+
+８修改列定义
+ALTER TABLE table_name MODIFY [COLUNMN] col_name col_definition [FIRST | AFTER col_name]；
+
+9修改列名称
+ALTER TABLE  tbl_name CHANGE [COLUMN] old_col_name new_col_name col_definition [FIRST | AFTER column_definition];
+
+10修改表名称
+方法一：ALTER TABLE tbl_name RENAME [TO/AS] new_tbl_name 
+方法二：RENAME TABLE　tbl_name TO new_tbl_name
+--------------------------------------------------------------------------------------------------------------------------
+INSERT语句
+插入记录
+INSERT tbl_name [(col_name,...)] {VALUES |VALUE} ({expr | DEFAULT},...),(...),...
+
+INSERT [INTO] tbl_name SET col_name={expr | DEFAULT}    #适用于子查询
+
+INSERT [INTO] tbl_name[(col_name,...)] SELECT...        #可以将查询结果插入到指定的数据表
+-------------------------------------------------------------------------------------------
+查询表达式 select_expr
+每一个表达式表示想要的一列，至少有一个
+多个列之间逗号隔开
+星号（*）表示所有列，tbl_name.*可以表示命名表的所有列
+查询表达式可以用[AS] alias_name为其赋名
+别名可用于GROUP BY,ORDER BY，HAVING字句
+SELECT id AS userid,name AS username FROM user;
+SELECT tbl2_name.id,tbl2_id,tbl2.age FROM tbl2
+
+-------------------------------------------------------------------------------------------
+更新记录（单表更新）
+UPDATE [LOW_PRIORITY] [IGNORE] table_name SET col_name1={expr | DEFAULT},col_name2={expr |DEFAULT}..... [WHERE where_condition]
+
+-------------------------------------------------------------------------------------------
+DELETE 单表删除
+DELETE FROM tbl_name [WHERE where_condition]
+
+-------------------------------------------------------------------------------------------
+WHRER 条件表达式
+
+GROUP BY 查询分组
+GROUP BY {col_name | position} [ASC | DESC],...
+
+HAVING  分组条件,条件是聚合函数
+[HAVAING where_condition]
+SELECT age FROM user GROUP BY 1 | user HAVAING AGE>20;
+
+查询结果排序
+ORDER BY {col_name |expr |position}  [ASC | DESC]
+
+限制查询结果返回的数量
+[LIMIT {[offset] row_count | row_count OFFSET offset}]
+SELECT * FROM user LIMIT 2,2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
